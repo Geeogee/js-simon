@@ -7,9 +7,10 @@
 
 var clock;
 var rndNumbers;
-var sec = 5;
+var sec = 30;
+var timeString = minutesLook(sec);
 var showTime = document.getElementById("timer-count");
-showTime.innerHTML = sec;
+showTime.innerHTML = timeString;
 
 function genRandomNumber(min,max) {
 
@@ -18,6 +19,18 @@ function genRandomNumber(min,max) {
     var rndNumber = Math.floor(Math.random() * rndMax) + rndMin;
 
     return rndNumber;
+}
+
+function minutesLook(sec) {
+
+    var minutes = Math.floor(sec / 60);
+    var seconds = sec % 60;
+
+    if(seconds < 10) {
+        seconds = "0" + seconds;
+    }
+    var string = minutes + ":" + seconds;
+    return string;
 }
 
 function getNumbers(length) {
@@ -34,14 +47,18 @@ function getNumbers(length) {
 
 function timer() {
 
-    showTime.innerHTML = --sec;
-        
+    --sec;
+    var timeString = minutesLook(sec);
+    showTime.innerHTML = timeString;
+     
     if (sec < 1) {
+
         showTime.innerHTML = "Time's up!";
         clearInterval(clock);
         var numbersMatch = getUserNumbers();
-        alert(numbersMatch.length);
-        alert(numbersMatch.join(" "));
+        var matchString = numbersMatch.join(" ");
+        alert("You memorized " + numbersMatch.length + " numbers!" + "\n" + "Numbers " + matchString);
+        
     }
 }
 
@@ -52,12 +69,11 @@ function getUserNumbers() {
         var userNumber = parseInt(prompt("Insert the " + (i+1) + "° number"));
 
         if(rndNumbers.includes(userNumber)) {
+
             numbersMatch.push(userNumber);
-            console.log(userNumber);
         }
     }
 
-    console.log(numbersMatch);
     return numbersMatch;
 }
 
@@ -65,7 +81,7 @@ function simonSays() {
 
     rndNumbers = getNumbers(5);
     console.log(rndNumbers);
-    alert(rndNumbers.join(" "));
+    alert("Can you remember these numbers?\n" + rndNumbers.join(" "));
     clock = setInterval(timer, 1000);
 
 }
