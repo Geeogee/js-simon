@@ -6,6 +6,7 @@
 
 
 var clock;
+var rndNumbers;
 var sec = 5;
 var showTime = document.getElementById("timer-count");
 showTime.innerHTML = sec;
@@ -33,24 +34,40 @@ function getNumbers(length) {
 
 function timer() {
 
-    showTime = document.getElementById("timer-count");
     showTime.innerHTML = --sec;
-
+        
     if (sec < 1) {
-        showTime.innerHTML = "Time's up!"
+        showTime.innerHTML = "Time's up!";
         clearInterval(clock);
-        alert("Ok after interval!")
+        var numbersMatch = getUserNumbers();
+        alert(numbersMatch.length);
+        alert(numbersMatch.join(" "));
     }
-    console.log(sec);
+}
 
+function getUserNumbers() {
+    
+    var numbersMatch = [];
+    for (var i=0; i<5; i++) {
+        var userNumber = parseInt(prompt("Insert the " + (i+1) + "° number"));
+
+        if(rndNumbers.includes(userNumber)) {
+            numbersMatch.push(userNumber);
+            console.log(userNumber);
+        }
+    }
+
+    console.log(numbersMatch);
+    return numbersMatch;
 }
 
 function simonSays() {
 
-    var rndNumbers = getNumbers(5);
+    rndNumbers = getNumbers(5);
+    console.log(rndNumbers);
     alert(rndNumbers.join(" "));
     clock = setInterval(timer, 1000);
- 
+
 }
 
 simonSays();
