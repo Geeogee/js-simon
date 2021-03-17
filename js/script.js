@@ -27,10 +27,12 @@ function minutesLook(sec) {
     var seconds = sec % 60;
 
     if(seconds < 10) {
+
         seconds = "0" + seconds;
     }
-    var string = minutes + ":" + seconds;
-    return string;
+
+    timeString = minutes + ":" + seconds;
+    return timeString;
 }
 
 function getNumbers(length) {
@@ -41,24 +43,24 @@ function getNumbers(length) {
         var number = genRandomNumber(1,50);
         numbers.push(number);
     }
-
     return numbers;
 }
 
 function timer() {
 
     --sec;
-    var timeString = minutesLook(sec);
+    timeString = minutesLook(sec);
     showTime.innerHTML = timeString;
      
     if (sec < 1) {
 
         showTime.innerHTML = "Time's up!";
         clearInterval(clock);
+
         var numbersMatch = getUserNumbers();
         var matchString = numbersMatch.join(" ");
+
         alert("You memorized " + numbersMatch.length + " numbers!" + "\n" + "Numbers " + matchString);
-        
     }
 }
 
@@ -66,6 +68,7 @@ function getUserNumbers() {
     
     var numbersMatch = [];
     for (var i=0; i<5; i++) {
+
         var userNumber = parseInt(prompt("Insert the " + (i+1) + "° number"));
 
         if(rndNumbers.includes(userNumber)) {
@@ -73,7 +76,6 @@ function getUserNumbers() {
             numbersMatch.push(userNumber);
         }
     }
-
     return numbersMatch;
 }
 
@@ -83,7 +85,6 @@ function simonSays() {
     console.log(rndNumbers);
     alert("Can you remember these numbers?\n" + rndNumbers.join(" "));
     clock = setInterval(timer, 1000);
-
 }
 
 simonSays();
