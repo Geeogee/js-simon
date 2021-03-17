@@ -1,15 +1,39 @@
+* {
+    border: 0;
+    margin: 0;
+    box-sizing: border-box;
+}
+
 body {
     font-family: "Orbitron", sans-serif;
 }
 
 .container {
     display: flex;
+    flex-direction: column;
     justify-content: center;
     align-items: center;
 
+    width: 50%;
+    margin: 0 auto;
     height: 100vh;
 }
 
 #timer-count {
-    font-size: 150px;
+    font-size: 80px;
 }
+
+#timer-test {
+    width: 60%;
+}
+
+#timer-bar {
+    width: 100%;
+    height: 10px;
+
+    background-color: #24ae06;
+
+    transition: all linear 1s;
+    border-radius: 3px;
+}
+

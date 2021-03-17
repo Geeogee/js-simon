@@ -8,9 +8,13 @@
 var clock;
 var rndNumbers;
 var sec = 30;
+var secStart = sec;
+var timerBarWidth;
 var timeString = minutesLook(sec);
 var showTime = document.getElementById("timer-count");
+var showTimerWidth = document.getElementById("timer-bar");
 showTime.innerHTML = timeString;
+
 
 function genRandomNumber(min,max) {
 
@@ -48,11 +52,31 @@ function getNumbers(length) {
 
 function timer() {
 
+    
     --sec;
+    console.log("sec diminuito", sec);
+    timerBarWidth = sec * 100 / secStart;
+    showTimerWidth.style.width = timerBarWidth + "%";
+
+    if (timerBarWidth < 10) {
+
+        showTimerWidth.style.background = "#de3618";
+    } else if (timerBarWidth < 25) {
+        
+        showTimerWidth.style.background = "#f0ae06"; 
+    } else if (timerBarWidth < 50) {
+
+        showTimerWidth.style.background = "#dfd707";
+    } else if (timerBarWidth < 75) {
+
+        showTimerWidth.style.background = "#82ae06";
+    }
+ 
+    console.log(timerBarWidth);
     timeString = minutesLook(sec);
     showTime.innerHTML = timeString;
      
-    if (sec < 1) {
+    if (sec < 0) {
 
         showTime.innerHTML = "Time's up!";
         clearInterval(clock);
