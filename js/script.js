@@ -39,23 +39,8 @@ function minutesLook(sec) {
     return timeString;
 }
 
-function getNumbers(length) {
+function timerBarAnimation() {
 
-    var numbers = [];
-    for (var i=0; i<length; i++) {
-
-        var number = genRandomNumber(1,50);
-        numbers.push(number);
-    }
-    return numbers;
-}
-
-function timer() {
-
-    
-    --sec;
-    console.log("sec diminuito", sec);
-    timerBarWidth = sec * 100 / secStart;
     showTimerWidth.style.width = timerBarWidth + "%";
 
     if (timerBarWidth < 10) {
@@ -71,12 +56,39 @@ function timer() {
 
         showTimerWidth.style.background = "#82ae06";
     }
- 
-    console.log(timerBarWidth);
+}
+
+function getNumbers(length) {
+
+    var numbers = [];
+    // for (var i=0; i<length; i++) {
+
+    //     var number = genRandomNumber(1,50);
+    //     numbers.push(number);
+    // }
+
+    while (numbers.length < length) {
+        var number = genRandomNumber(1,100);
+        console.log(number);
+        if (!numbers.includes(number)) {
+            numbers.push(number)
+        }
+    }
+
+    return numbers;
+}
+
+function timer() {
+
+    --sec;
+    console.log("sec diminuito", sec);
+    timerBarWidth = sec * 100 / secStart;
+    timerBarAnimation(timerBarWidth);
+    // console.log(timerBarWidth);
     timeString = minutesLook(sec);
     showTime.innerHTML = timeString;
      
-    if (sec < 0) {
+    if (sec == 0) {
 
         showTime.innerHTML = "Time's up!";
         clearInterval(clock);
